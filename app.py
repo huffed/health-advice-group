@@ -8,29 +8,105 @@ from extensions import argon2
 # MODELS
 from models.user import Usergroups, Users
 
+# FORMS
+from forms.user import RegisterForm, LoginForm
+
+# Use the create_app function from the config to generate the values
+# for all the constructor type variables.
 app, database, login_manager, limiter, logger, csrf = create_app()
 
+# Create database tables on startup if they haven't been created already.
 with app.app_context():
     database.create_all()
 
 
 @login_manager.user_loader
 def load_user(user_id):
-    query = text(
-        "SELECT id, username, password FROM users WHERE id = :user_id"
-    )
-    result = database.session.execute(query, {"user_id": user_id}).fetchone()
+    # Defining the process for logging a user in.
 
-    if result:
-        id, username, password = result
+    # Providing the SQL statement that will be used to
+    # get the user that has the id provided in the parameters.
+    query = text(
+        'SELECT id, username, password FROM users WHERE id = :user_id'
+    )
+    # Get the user that has the id provided in the parameters.
+    result = database.session.execute(query, {'user_id': user_id}).fetchone()
+
+    if result:  # If the user exists.
+        id, username, password = result  # Expanding the result
         return Users(id=id, username=username, password=password)
 
 
 @app.context_processor
 def context_processor():
+    # These functions run before rendering a template.
     return dict(user=current_user, active_page=request.path)
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("index.html")
+    return render_template('index.html')
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    # This is the route for processing requests on the /register route
+
+    # Providing the form that will be used on the page
+    form = RegisterForm()
+
+    # This defines the processes that will happen when the form is submitted
+    if form.validate_on_submit():
+
+        # Hashing the password that is provided by the form using the Argon2 algorithm
+        hashed_password = argon2.generate_password_hash(form.password.data)
+
+        # Providing the SQL statement that will be used to insert the user into the database
+        query = text(
+            'INSERT INTO users (username, email, password, date_created) VALUES (:username, :email, :password, :date_created)'
+        )
+        try:
+            # Attempts to insert the user into the database
+            database.session.execute(
+                query, {'username': form.username.data, 'password': hashed_password})
+            database.session.commit()
+        except Exception as error:
+            # If there are any problems inserting the user into the database
+            # The database committing session will rollback for security and raise the error
+            database.session.rollback()
+            raise error
+
+    # Load the register-login template and providing the form and
+    # form_type variables for the template to use
+    return render_template('register-login.html', form=form, form_type=request.path.strip('/'))
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    # This is the route for processing requests on the /login route
+
+    # Providing the form that will be used on the page
+    form = LoginForm()
+
+    # This defines the processes that will happen when the form is submitted
+    if form.validate_on_submit():
+        query = text(
+            'SELECT * FROM users WHERE username = :username'
+        )
+        user = database.session.execute(
+            query, {'username': form.username.data}).fetchone()
+
+        if user and argon2.check_password_hash(user.password, form.password.data):
+            login_user(Users(id=user.id, username=user.username,
+                       password=user.password), remember=form.remember.data)
+            try:
+                return redirect(url_for(request.args['next'].strip('/')))
+            except:
+                return redirect(url_for('index'))
+
+
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')

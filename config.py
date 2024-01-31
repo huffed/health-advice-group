@@ -17,10 +17,10 @@ db = SQLAlchemy()
 
 
 def create_app():
-    # Create an instance of the Flask class
+    # Create an instance of the Flask class.
     app = Flask(__name__)
 
-    # Set the SQL Alchemy Database URI
+    # Set the SQL Alchemy Database URI.
     app.config["SQLALCHEMY_DATABASE_URI"] = sqlite_db_path
 
     # Signing cookies is a preventive measure against cookie tampering.
@@ -28,10 +28,10 @@ def create_app():
     # a way similar to how a "salt" would be used to muddle a password before hashing it.
     app.config["SECRET_KEY"] = "H34lth4dv1c3Gr0up333"
 
-    # Create an instance of the CSRF Token
+    # Create an instance of the CSRF Token.
     csrf = CSRFProtect(app)
 
-    # Create an instance of the LoginManager class
+    # Create an instance of the LoginManager class.
     login_manager = LoginManager()
 
     # Initialise helpers for use with this Flask instance.
@@ -40,17 +40,17 @@ def create_app():
     db.init_app(app)
     login_manager.init_app(app)
 
-    # Define the route to direct users to when they encounter a page that requires login
+    # Define the route to direct users to when they encounter a page that requires login.
     login_manager.login_view = "login"
 
-    # Define the error message to display when they encounter a page that requires login
+    # Define the error message to display when they encounter a page that requires login.
     login_manager.login_message = "Please login to access this page."
 
-    # Create an instance of the Limiter class that will be used to handle route limiting
+    # Create an instance of the Limiter class that will be used to handle route limiting.
     limiter = Limiter(
         app=app, key_func=lambda: request.remote_addr, storage_uri="memory://")
 
-    # Setup of the logging that will keep errors from being shown in the console
+    # Setup of the logging that will keep errors from being shown in the console.
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
     app.logger.handlers.clear()
