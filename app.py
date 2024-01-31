@@ -1,9 +1,11 @@
+# GENERAL IMPORTS
 from flask import render_template, url_for, redirect, request
 from sqlalchemy import text
 from flask_login import login_user, login_required, current_user, logout_user
 from config import create_app
 from extensions import argon2
 
+# MODELS
 from models.user import Usergroups, Users
 
 app, database, login_manager, limiter, logger, csrf = create_app()
