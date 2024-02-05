@@ -110,7 +110,7 @@ input {
 
 button {
   margin-left: 1.25rem;
-  padding: 0.6rem 1.6rem;
+  padding: 0.6rem @base-size-x3;
   background-color: @base-color-accent;
   border: none;
   border-radius: 3.1rem;
@@ -185,6 +185,7 @@ header {
   .logo {
     font-size: @base-h6-font-size;
     font-weight: @base-heavy-font-weight;
+    margin-left: @base-size-x3;
   }
 
   .nav-links {
@@ -212,7 +213,7 @@ header {
     }
 
     a {
-      margin-right: 1.6rem;
+      margin-right: @base-size-x3;
       margin-left: 0.625rem;
       transition: @base-transition;
 
@@ -440,7 +441,7 @@ main {
 
                   &:hover {
                     transform: none;
-                    box-shadow: 0 0.6rem 1.6rem -0.8rem @base-color-accent;
+                    box-shadow: 0 0.6rem @base-size-x3 -0.8rem @base-color-accent;
                   }
                 }
               }
@@ -660,7 +661,7 @@ main {
         font-size: @base-body-font-size;
         color: @base-color-black;
         text-align: center;
-        margin: 1.6rem 0 0.625rem;
+        margin: @base-size-x3 0 0.625rem;
       }
     }
 
@@ -889,7 +890,7 @@ main {
       a {
         display: block;
         margin: 0.75rem 0;
-        padding: 0 1.6rem;
+        padding: 0 @base-size-x3;
         transition: @base-transition;
         color: @base-color-black;
 

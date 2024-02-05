@@ -90,17 +90,27 @@ def login():
 
     # This defines the processes that will happen when the form is submitted
     if form.validate_on_submit():
+
+        # Providing the SQL statement that will be used to search for the user in the database
         query = text(
             'SELECT * FROM users WHERE username = :username'
         )
+
+        # Attempts to get the user from the database using their username
         user = database.session.execute(
             query, {'username': form.username.data}).fetchone()
 
+        # If the user exists and the password matches the hash
         if user and argon2.check_password_hash(user.password, form.password.data):
+
+            # Login the user using the login_user function providing the User class that is needed
             login_user(Users(id=user.id, username=user.username,
                        password=user.password), remember=form.remember.data)
+
+            # If they have accessed the page via attempting to access a page that requires a login
             try:
                 return redirect(url_for(request.args['next'].strip('/')))
+            # If they have accessed the page directly
             except:
                 return redirect(url_for('index'))
 
