@@ -1,5 +1,26 @@
 {% extends 'base.html' %} {% block title_extension %} - Home{% endblock %} {%
 block preface_body %} {% include 'header.html' %} {% endblock %}{% block content
 %}
-<div class="primary-content"></div>
+<div class="primary-content">
+  <div class="columns">
+    <div class="column-1">
+      <div class="header-text">
+        <h1>Confidential</h1>
+        <h2>help and advice</h2>
+      </div>
+      <div class="caption">
+        It’s safe and easy to use. Just sign up and get instant advice based on
+        your location and any information you give.
+      </div>
+      <button class="primary-button">START GETTING ADVICE</button>
+    </div>
+    <div class="column-2">
+      <img
+        src="https://chathealth.nhs.uk/wp-content/uploads/2018/11/Hompage1.jpg"
+        alt="Primary content image - woman using her phone"
+      />
+    </div>
+  </div>
+  <div class="background-gradient"></div>
+</div>
 {% endblock %}

@@ -56,13 +56,13 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  font-family: @base-font-family;
-  font-size: @base-body-font-size;
+  font-family: @font-family;
+  font-size: @body-font-size;
   height: 100vh;
-  color: @base-color-black;
-  font-weight: @base-regular-font-weight;
+  color: @color-black;
+  font-weight: @regular-font-weight;
   letter-spacing: 0.025rem;
-  background-color: @base-background-color;
+  background-color: @background-color;
   overflow-x: hidden;
   margin: 0 12%;
   scroll-behavior: smooth;
@@ -70,7 +70,7 @@ body {
 }
 
 .color-effect {
-  background: @base-text-gradient;
+  background: @text-gradient;
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -79,7 +79,7 @@ body {
 .font-effect {
   font-style: italic;
   -webkit-text-stroke-width: 0.1rem;
-  -webkit-text-stroke-color: @base-color-black;
+  -webkit-text-stroke-color: @color-black;
   color: transparent;
 }
 
@@ -88,11 +88,11 @@ i {
 }
 
 h1 {
-  font-size: @base-h1-font-size;
+  font-size: @h1-font-size;
 }
 
 h2 {
-  font-size: @base-h2-font-size;
+  font-size: @h2-font-size;
 }
 
 // BUTTONS
@@ -100,22 +100,22 @@ li,
 a,
 button,
 input {
-  font-family: @base-font-family;
-  font-weight: @base-medium-font-weight;
-  font-size: @base-button-large-font-size;
-  color: @base-color-black;
+  font-family: @font-family;
+  font-weight: @medium-font-weight;
+  font-size: @button-large-font-size;
+  color: @color-black;
   text-decoration: none;
   list-style-type: none;
 }
 
 button {
   margin-left: 1.25rem;
-  padding: 0.6rem @base-size-x3;
-  background-color: @base-color-accent;
+  padding: 0.6rem @size-x3;
+  background-color: @color-accent;
   border: none;
   border-radius: 3.1rem;
   cursor: pointer;
-  color: @base-color-white;
+  color: @color-white;
 }
 
 a,
@@ -124,29 +124,29 @@ input {
   // <button> button
   &.primary-button {
     padding: 0.5rem 2rem;
-    background-color: @base-color-accent;
+    background-color: @color-accent;
     cursor: pointer;
-    color: @base-color-white;
+    color: @color-white;
     border-radius: 0.4rem;
     display: inline-block;
-    font-size: @base-body-font-size;
+    font-size: @body-font-size;
     white-space: nowrap;
-    transition: @base-transition;
+    transition: @transition;
 
     &:hover {
       transform: translate(0, -0.2rem);
-      box-shadow: 0 0.6rem 3.1rem -0.6rem @base-color-accent;
+      box-shadow: 0 0.6rem 3.1rem -0.6rem @color-accent;
     }
   }
 
   // <a> button
   &.secondary-button {
-    background-color: @base-color-white;
+    background-color: @color-white;
     cursor: pointer;
     border: none;
     border-radius: 3.1rem;
     padding: 0.6rem 1.25rem;
-    transition: @base-transition;
+    transition: @transition;
 
     &:hover {
       transform: translate(0, -0.2rem);
@@ -159,8 +159,8 @@ input {
       transition: transform ease 0.2s;
 
       &.active {
-        color: @base-color-accent;
-        font-weight: @base-bold-font-weight;
+        color: @color-accent;
+        font-weight: @bold-font-weight;
       }
     }
   }
@@ -179,13 +179,13 @@ header {
   justify-content: space-between;
   background: transparent;
   padding: 1.75rem 0;
-  transition: @base-transition;
+  transition: @transition;
   margin-bottom: 40px;
 
   .logo {
-    font-size: @base-h6-font-size;
-    font-weight: @base-heavy-font-weight;
-    margin-left: @base-size-x3;
+    font-size: @h6-font-size;
+    font-weight: @heavy-font-weight;
+    margin-left: @size-x3;
   }
 
   .nav-links {
@@ -196,10 +196,10 @@ header {
 
     a {
       margin: 0rem 1.9rem;
-      transition: @base-transition;
+      transition: @transition;
 
       &:hover {
-        color: @base-color-accent;
+        color: @color-accent;
       }
     }
   }
@@ -213,22 +213,22 @@ header {
     }
 
     a {
-      margin-right: @base-size-x3;
+      margin-right: @size-x3;
       margin-left: 0.625rem;
-      transition: @base-transition;
+      transition: @transition;
 
       &.active {
-        color: @base-color-accent;
-        font-weight: @base-bold-font-weight;
+        color: @color-accent;
+        font-weight: @bold-font-weight;
       }
 
       &:hover {
-        color: @base-color-accent;
+        color: @color-accent;
       }
 
       &.logged-in {
         &:hover {
-          color: @base-color-black;
+          color: @color-black;
         }
       }
     }
@@ -238,7 +238,7 @@ header {
       align-items: center;
 
       i {
-        color: @base-color-accent;
+        color: @color-accent;
         font-size: 1.2rem;
         margin-right: 0.6rem;
       }
@@ -253,7 +253,7 @@ header {
         border-radius: 0.4rem;
         padding: 0.5rem;
         margin-right: 2.5625rem;
-        transition: @base-transition;
+        transition: @transition;
         cursor: pointer;
 
         .user {
@@ -262,18 +262,18 @@ header {
         }
 
         i {
-          color: @base-color-accent;
+          color: @color-accent;
           margin-right: 0.6rem;
         }
 
         &:hover {
-          color: @base-color-accent;
+          color: @color-accent;
         }
       }
 
       .links {
         right: -100%;
-        background-color: @base-color-white;
+        background-color: @color-white;
         position: absolute;
         top: 100%;
         left: auto;
@@ -305,7 +305,7 @@ header {
   }
 
   #menu-icon {
-    font-size: @base-h6-font-size;
+    font-size: @h6-font-size;
     cursor: pointer;
     z-index: 10001;
     display: none;
@@ -313,7 +313,7 @@ header {
     transition: all, 0.2s;
 
     &:hover {
-      color: @base-color-accent;
+      color: @color-accent;
     }
   }
 }
@@ -331,170 +331,93 @@ main {
   // INDEX PAGE
   .primary-content {
     padding: 0 5.5rem 1.25rem 2.5rem;
+    color: @color-black;
 
-    .main-search .main-search-container {
-      width: 100%;
-      max-width: 63rem;
-      margin: 0 auto;
+    .background-gradient {
+      background: @background-gradient;
+      position: absolute;
+      width: 140%;
+      height: 79.95rem;
+      left: -20%;
+      top: 0;
+      z-index: -1;
 
-      .main-search-tool {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      &:before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        background-image: linear-gradient(
+          to top,
+          rgba(@color-white, 0),
+          rgba(@color-white, 1) 90%
+        );
+        width: 100%;
+        height: 20rem;
+      }
 
-        h2 {
-          max-width: 34rem;
-          text-align: center;
+      &:before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        background-image: linear-gradient(
+          to top,
+          rgba(@color-white, 0),
+          rgba(@color-white, 1) 90%
+        );
+        width: 100%;
+        height: 20rem;
+      }
+    }
+
+    .columns {
+      display: flex;
+      flex-direction: row;
+      margin-top: 10rem;
+
+      .column-1 {
+        max-width: 21rem;
+        width: 21rem;
+        margin-right: @size-x6;
+
+        h1 {
+          font-weight: 600;
         }
 
-        .mobile-style-container {
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: calc(100% - @base-size-x2);
+        h2 {
+          font-weight: 500;
+        }
 
-          .search {
-            width: 100%;
-            max-width: 45rem;
+        .caption {
+          font-size: @h5-font-size;
+          margin-top: @size-x2;
+        }
 
-            form {
-              .form-container {
-                width: 100%;
-                position: relative;
-                display: inline-flex;
-                align-items: center;
-                padding: 0 @base-size-x1;
-                margin-top: @base-size-x4;
-                background-color: @base-color-white;
-                border-radius: 2.4rem;
-                border: @base-size-x1 solid rgba(@base-color-accent, 0.1);
-                transition: @base-transition;
+        button {
+          margin-top: @size-x3;
+          margin-left: 0;
+          width: 100%;
+          height: @size-x4;
+          border: 2px @color-white solid;
 
-                .search-course {
-                  position: relative;
-                  display: flex;
-                  padding: 1.25rem 0;
-                  min-width: 8rem;
-                  flex-grow: 1;
-                  align-items: center;
-
-                  #course {
-                    max-width: 75%;
-                    border: unset;
-                    outline: unset;
-                    appearance: unset;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    background: none;
-                  }
-
-                  i {
-                    color: rgba(@base-color-black, 0.4);
-                    margin: 0 @base-size-x1;
-                  }
-
-                  .clear-button i {
-                    pointer-events: none;
-                    cursor: pointer;
-                    opacity: 0;
-                  }
-
-                  .course-choices-dropdown {
-                    display: none;
-                    position: absolute;
-                    top: calc(4.5rem + @base-size-x1);
-                    left: calc(@base-size-x1 * -1);
-                    width: 100%;
-                    background: @base-color-white;
-                    border-radius: @base-size-x3;
-                    text-align: left;
-                    padding: @base-size-x2;
-                    overflow: hidden;
-                    box-shadow: 0 0.6rem 3.1rem -1.5rem @base-color-accent;
-                    flex-direction: column;
-                    gap: 0.7rem;
-
-                    div {
-                      cursor: pointer;
-                      transition: @base-transition;
-                      padding: 0.4rem;
-                      border-radius: 1rem;
-
-                      &:hover {
-                        background-color: rgba(@base-color-accent, 0.1);
-                      }
-                    }
-
-                    .highlight {
-                      font-weight: bold;
-                    }
-                  }
-                }
-
-                .primary-button {
-                  border: 0px;
-                  border-radius: @base-size-x9;
-                  padding: @base-size-x2 @base-size-x4;
-
-                  &:hover {
-                    transform: none;
-                    box-shadow: 0 0.6rem @base-size-x3 -0.8rem @base-color-accent;
-                  }
-                }
-              }
-            }
+          &:hover {
+            transform: none;
+            box-shadow: none;
+            background-color: @color-white;
+            color: @color-accent;
           }
+        }
+      }
 
-          .search-quick {
-            height: 6rem;
-            background-color: rgba(@base-color-accent, 0.3);
-            margin: @base-size-x4 0 @base-size-x1;
-            border-radius: @base-size-x5;
-            padding: @base-size-x1 @base-size-x2;
-            pointer-events: inherit;
-            transition: @base-transition;
-            display: flex;
-            align-items: center;
-
-            ul {
-              list-style: none;
-              padding: 0;
-              margin: 0;
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-              gap: @base-size-x1;
-
-              li {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-evenly;
-                padding: @base-size-x1 @base-size-x3;
-                cursor: pointer;
-
-                i {
-                  display: block;
-                  font-size: 1.5rem;
-                }
-
-                span {
-                  white-space: nowrap;
-                  line-height: @base-size-x2;
-                  padding-top: 0.5rem;
-                  user-select: none;
-                }
-
-                &:hover {
-                  background-color: rgba(@base-color-white, 0.5);
-                  border-radius: 1.4rem;
-                }
-              }
-            }
-          }
+      .column-2 {
+        margin-top: calc(@size-x2 * 5);
+        img {
+          filter: hue-rotate(280deg) saturate(0.6) opacity(0.6);
         }
       }
     }
@@ -526,7 +449,7 @@ main {
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 0 3rem -2rem @base-color-accent;
+      box-shadow: 0 0 3rem -2rem @color-accent;
       backdrop-filter: blur(1rem);
       margin-bottom: 4rem;
 
@@ -542,13 +465,13 @@ main {
         top: 4rem;
 
         li {
-          color: @base-color-red;
+          color: @color-red;
         }
       }
 
       h2 {
-        font-size: @base-h4-font-size;
-        color: @base-color-black;
+        font-size: @h4-font-size;
+        color: @color-black;
         text-align: center;
         margin-bottom: 20%;
       }
@@ -564,10 +487,10 @@ main {
           top: 50%;
           left: 0.3rem;
           transform: translateY(-50%);
-          font-size: @base-body-font-size;
-          color: @base-color-black;
+          font-size: @body-font-size;
+          color: @color-black;
           pointer-events: none;
-          transition: @base-transition;
+          transition: @transition;
         }
 
         input {
@@ -576,8 +499,8 @@ main {
           background: transparent;
           border: none;
           outline: none;
-          font-size: @base-body-font-size;
-          color: @base-color-black;
+          font-size: @body-font-size;
+          color: @color-black;
           padding: 0 4.5rem 0 0.5rem;
 
           &#password {
@@ -600,8 +523,8 @@ main {
         i {
           position: absolute;
           right: 0.5rem;
-          color: @base-color-accent;
-          font-size: @base-h6-font-size;
+          color: @color-accent;
+          font-size: @h6-font-size;
           line-height: 3.3rem;
 
           &#togglePassword {
@@ -614,9 +537,9 @@ main {
       }
 
       a {
-        color: @base-color-accent;
+        color: @color-accent;
         font-weight: 600;
-        transition: @base-transition;
+        transition: @transition;
 
         &:hover {
           opacity: 70%;
@@ -625,14 +548,14 @@ main {
 
       .remember-forgot {
         margin-top: -1rem;
-        font-size: @base-body-font-size;
-        color: @base-color-black;
+        font-size: @body-font-size;
+        color: @color-black;
         display: flex;
         justify-content: space-between;
 
         input {
           margin-right: 0.2rem;
-          accent-color: @base-color-accent;
+          accent-color: @color-accent;
         }
 
         a {
@@ -643,25 +566,25 @@ main {
       .primary-button {
         width: 100%;
         height: 2.5rem;
-        background: @base-color-accent;
+        background: @color-accent;
         border: none;
         outline: none;
         border-radius: 2.5rem;
-        color: @base-color-white;
+        color: @color-white;
         font-weight: 500;
-        background: @base-text-gradient;
+        background: @text-gradient;
 
         &:hover {
-          box-shadow: 0 0.6rem 2rem -1rem @base-color-accent;
+          box-shadow: 0 0.6rem 2rem -1rem @color-accent;
         }
       }
 
       .login-link,
       .register-link {
-        font-size: @base-body-font-size;
-        color: @base-color-black;
+        font-size: @body-font-size;
+        color: @color-black;
         text-align: center;
-        margin: @base-size-x3 0 0.625rem;
+        margin: @size-x3 0 0.625rem;
       }
     }
 
@@ -689,7 +612,7 @@ main {
       display: flex;
       position: relative;
       border: 0;
-      font-weight: @base-bold-font-weight;
+      font-weight: @bold-font-weight;
       background: none;
       white-space: nowrap;
       padding: 4vw;
@@ -719,8 +642,8 @@ main {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: @base-h3-font-size;
-        color: @base-color-accent;
+        font-size: @h3-font-size;
+        color: @color-accent;
         opacity: 0;
         transition: all 500ms ease;
         transition-delay: 1000ms;
@@ -777,7 +700,7 @@ main {
     }
 
     .bug {
-      background: @base-color-accent;
+      background: @color-accent;
       transition: transform 4000ms ease;
       width: 2.25vw;
       height: 2.5vw;
@@ -794,7 +717,7 @@ main {
         position: absolute;
         top: 0;
         left: 0.375vw;
-        background: @base-color-accent;
+        background: @color-accent;
         border-radius: 100%;
         z-index: -1;
         transition: all 1000ms ease;
@@ -814,8 +737,8 @@ main {
             linear-gradient(
               transparent,
               transparent 45%,
-              @base-color-accent 45%,
-              @base-color-accent 55%,
+              @color-accent 45%,
+              @color-accent 55%,
               transparent 55%
             ),
           top left/100% 100%
@@ -823,8 +746,8 @@ main {
               to bottom right,
               transparent,
               transparent 45%,
-              @base-color-accent 45%,
-              @base-color-accent 55%,
+              @color-accent 45%,
+              @color-accent 55%,
               transparent 55%
             ),
           top left/100% 100%
@@ -832,8 +755,8 @@ main {
               to bottom left,
               transparent,
               transparent 45%,
-              @base-color-accent 45%,
-              @base-color-accent 55%,
+              @color-accent 45%,
+              @color-accent 55%,
               transparent 55%
             );
       }
@@ -863,7 +786,7 @@ main {
 @media screen and (max-width: 1260px) {
   header {
     padding: 0.9rem 2%;
-    transition: @base-transition;
+    transition: @transition;
 
     #menu-icon {
       display: block;
@@ -871,7 +794,7 @@ main {
 
     .nav-links,
     .profile-container .links {
-      background-color: @base-color-white;
+      background-color: @color-white;
       position: absolute;
       top: 100%;
       right: -100%;
@@ -883,19 +806,19 @@ main {
       flex-direction: column;
       justify-content: flex-start;
       border-radius: 0.625rem;
-      transition: @base-transition;
+      transition: @transition;
       border: 0.1rem solid;
       border-color: rgba(0, 0, 0, 0.5);
 
       a {
         display: block;
         margin: 0.75rem 0;
-        padding: 0 @base-size-x3;
-        transition: @base-transition;
-        color: @base-color-black;
+        padding: 0 @size-x3;
+        transition: @transition;
+        color: @color-black;
 
         &:hover {
-          color: @base-color-accent;
+          color: @color-accent;
           transform: none;
         }
       }
