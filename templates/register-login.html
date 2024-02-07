@@ -1,0 +1,91 @@
+{% extends 'base.html' %}{% block title_extension %} - {{form_type|title}}{% endblock %} {% block preface_body %}
+{% include 'header.html' %}
+{% endblock %}{%
+block content %}
+
+<div class="{{form_type}}">
+    <div class="{{form_type}}-container" {% if form_type=='register' %} style="height: 32rem" {% endif %}>
+        <form action="" method="post">
+            {{form.csrf_token}}
+            <h2>{{form_type|title}}</h2>
+            <ul class="errors">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+                {% if form.errors %}
+                {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+            </ul>
+            <div class="input-box">
+                <i class="fa-solid fa-at"></i>
+                {{form.username}}
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+                {{form.password}}
+                <i class="fa-regular fa-eye-slash" id="togglePassword"></i>
+                <label>Password</label>
+            </div>
+            {% if form_type == 'register' %}
+            <div class="input-box">
+                <i class="fa-solid fa-lock"></i>
+                {{form.confirm}}
+                <label>Confirm Password</label>
+            </div>
+            {% endif %}
+            {%if form_type == "login"%}
+            <div class="remember-forgot">
+                <label for="remember">{{form.remember}} Remember me</label>
+                <a href="#">Forgot Password?</a>
+            </div>
+            {%endif%}
+            {{form.submit(value="Login" if form_type=="login" else "Sign up", class="primary-button")}}
+            <div class="login-link">
+                {% if form_type=="register" %}
+                <p>Already have an account? <a href="{{url_for('login')}}">Login</a></p>
+                {% else %}
+                <p>Don't have an account? <a href="{{url_for('register')}}">Sign up</a></p>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        // This part makes it so that the username and password labels move with the autocomplete
+        setTimeout(function () {
+            $('#password').focus();
+            $('#username').focus();
+        }, 600);
+
+        // This is the reveal password icon code
+        $('#togglePassword').click(function () {
+            const passwordInput = $('#password');
+            const isPassword = passwordInput.attr('type') === 'password';
+
+            passwordInput.attr('type', isPassword ? 'text' : 'password');
+            $(this).toggleClass('fa-eye-slash fa-eye').css('padding-right', isPassword ? '1.4px' : '');
+        });
+
+        // This removes the error message when you start typing
+        $('.input-box').on('input', function () {
+            $('.errors').hide();
+        });
+    });
+</script>
+
+
+
+{% endblock %}

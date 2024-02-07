@@ -182,10 +182,19 @@ header {
   transition: @transition;
   margin-bottom: 40px;
 
-  .logo {
-    font-size: @h6-font-size;
-    font-weight: @heavy-font-weight;
-    margin-left: @size-x3;
+  p {
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: -1rem;
+    }
+
+    .logo {
+      font-size: @h6-font-size;
+      font-weight: @heavy-font-weight;
+      margin-left: @size-x3;
+    }
   }
 
   .nav-links {
@@ -318,6 +327,26 @@ header {
   }
 }
 
+// FOOTER
+footer {
+  position: fixed;
+  bottom: @size-x1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  p {
+    font-weight: @bold-font-weight;
+    display: flex;
+    align-items: center;
+
+    img {
+      margin-right: @size-x1;
+    }
+  }
+}
+
 // MAIN
 main {
   display: flex;
@@ -337,7 +366,7 @@ main {
       background: @background-gradient;
       position: absolute;
       width: 140%;
-      height: 79.95rem;
+      height: 100vh;
       left: -20%;
       top: 0;
       z-index: -1;
@@ -398,12 +427,15 @@ main {
           margin-top: @size-x2;
         }
 
-        button {
+        a {
           margin-top: @size-x3;
           margin-left: 0;
           width: 100%;
           height: @size-x4;
           border: 2px @color-white solid;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
           &:hover {
             transform: none;

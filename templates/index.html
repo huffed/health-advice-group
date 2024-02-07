@@ -12,15 +12,16 @@ block preface_body %} {% include 'header.html' %} {% endblock %}{% block content
         It’s safe and easy to use. Just sign up and get instant advice based on
         your location and any information you give.
       </div>
-      <button class="primary-button">START GETTING ADVICE</button>
+      <a class="primary-button" href="{{url_for('register')}}">START GETTING ADVICE</a>
     </div>
     <div class="column-2">
-      <img
-        src="https://chathealth.nhs.uk/wp-content/uploads/2018/11/Hompage1.jpg"
-        alt="Primary content image - woman using her phone"
-      />
+      <img src="https://chathealth.nhs.uk/wp-content/uploads/2018/11/Hompage1.jpg"
+        alt="Primary content image - woman using her phone" />
     </div>
   </div>
   <div class="background-gradient"></div>
 </div>
+{% endblock %}
+{% block postface_body %}
+{% include 'footer.html' %}
 {% endblock %}

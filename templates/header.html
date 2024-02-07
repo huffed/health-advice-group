@@ -1,57 +1,58 @@
 <header>
-    <a href="/" class="color-effect logo">Health Advice Group</a>
-    <ul class="nav-links">
-      <li>
-        <a href="{{url_for('index')}}"
-          class="secondary-button 2{% if active_page == url_for('index') %} active{% endif %}">Home</a>
-      </li>
-      <li>
-        <a href="{{url_for('index')}}"
-          class="secondary-button 2{% if active_page == '/courses' %} active{% endif %}">Courses</a>
-      </li>
-      <li>
-        <a href="{{url_for('index')}}"
-          class="secondary-button 2{% if active_page == '/tutors' %} active{% endif %}">Tutors</a>
-      </li>
-    </ul>
-    <div class="main-buttons">
-      {% if user.is_authenticated %}
-      <div class="profile-container">
-        <div class="profile">
-          <i class="fa-regular fa-user"></i>
-          <div class="user logged-in">{{user.username}}</div>
-        </div>
-        <ul class="links">
-          <li>
-            <a href="{{url_for('logout')}}"
-              class="secondary-button 2{% if active_page == url_for('logout') %} active{% endif %}">Logout</a>
-          </li>
-        </ul>
+  <p><img src="{{url_for('static', filename='favicon/favicon-32x32.png')}}" alt="Health Advice Group Logo"><a href="/"
+      class="color-effect logo">Health Advice Group</a></p>
+  <ul class="nav-links">
+    <li>
+      <a href="{{url_for('index')}}"
+        class="secondary-button 2{% if active_page == url_for('index') %} active{% endif %}">Home</a>
+    </li>
+    <li>
+      <a href="{{url_for('dashboard')}}"
+        class="secondary-button 2{% if active_page == '/courses' %} active{% endif %}">Dashboard</a>
+    </li>
+    <li>
+      <a href="{{url_for('index')}}"
+        class="secondary-button 2{% if active_page == '/tutors' %} active{% endif %}">Tutors</a>
+    </li>
+  </ul>
+  <div class="main-buttons">
+    {% if user.is_authenticated %}
+    <div class="profile-container">
+      <div class="profile">
+        <i class="fa-regular fa-user"></i>
+        <div class="user logged-in">{{user.username}}</div>
       </div>
-      {% else %}
-      <a class="user{% if active_page == '/login' %} active{% endif %}" href="{{url_for('login')}}"><i
-          class="fa-solid fa-user"></i>Sign In</a>
-      <a {% if active_page=='/register' %}class="active" {% endif %} href="{{url_for('register')}}">Register</a>
-      {% endif %}
-      <i class="fa-solid fa-bars" id="menu-icon"></i>
+      <ul class="links">
+        <li>
+          <a href="{{url_for('logout')}}"
+            class="secondary-button 2{% if active_page == url_for('logout') %} active{% endif %}">Logout</a>
+        </li>
+      </ul>
     </div>
-  </header>
-  
-  <script>
-    $("#menu-icon").click(function () {
-      $(".nav-links").toggleClass("open");
-      const isOpen = $(".nav-links").hasClass("open");
-  
-      $("#menu-icon").attr('class', isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars");
-      $(".profile-container .links").removeClass("open");
-    });
-  
-    $(".profile").click(function () {
-      const isOpen = $(".nav-links").hasClass("open");
-      if (isOpen !== "none") {
-        $(".nav-links").removeClass("open");
-        $("#menu-icon").removeClass().addClass("fa-solid fa-bars");
-      }
-      $(".profile-container .links").toggleClass("open");
-    });
-  </script>
+    {% else %}
+    <a class="user{% if active_page == '/login' %} active{% endif %}" href="{{url_for('login')}}"><i
+        class="fa-solid fa-user"></i>Sign In</a>
+    <a {% if active_page=='/register' %}class="active" {% endif %} href="{{url_for('register')}}">Register</a>
+    {% endif %}
+    <i class="fa-solid fa-bars" id="menu-icon"></i>
+  </div>
+</header>
+
+<script>
+  $("#menu-icon").click(function () {
+    $(".nav-links").toggleClass("open");
+    const isOpen = $(".nav-links").hasClass("open");
+
+    $("#menu-icon").attr('class', isOpen ? "fa-solid fa-xmark" : "fa-solid fa-bars");
+    $(".profile-container .links").removeClass("open");
+  });
+
+  $(".profile").click(function () {
+    const isOpen = $(".nav-links").hasClass("open");
+    if (isOpen !== "none") {
+      $(".nav-links").removeClass("open");
+      $("#menu-icon").removeClass().addClass("fa-solid fa-bars");
+    }
+    $(".profile-container .links").toggleClass("open");
+  });
+</script>

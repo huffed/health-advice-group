@@ -113,6 +113,10 @@ def login():
             # If they have accessed the page directly
             except:
                 return redirect(url_for('index'))
+        else:
+            return render_template('register-login.html', form=form, form_type=request.path.strip('/'))
+
+    return render_template('register-login.html', form=form, form_type=request.path.strip('/'))
 
 
 @app.route('/logout', methods=['GET', 'POST'])
@@ -120,3 +124,9 @@ def login():
 def logout():
     logout_user()
     return redirect('/')
+
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+@login_required
+def dashboard():
+    return render_template('dashboard/index.html')
