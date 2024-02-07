@@ -10,18 +10,20 @@ block preface_body %} {% include 'header.html' %} {% endblock %}{% block content
       </div>
       <div class="caption">
         It’s safe and easy to use. Just sign up and get instant advice based on
-        your location and any information you give.
+        your location and any information you give. Our app is designed to
+        provide a safe, convenient, platform for individuals seeking immediate
+        guidance and support based on their location and personal information.
       </div>
       <a class="primary-button" href="{{url_for('register')}}">START GETTING ADVICE</a>
     </div>
     <div class="column-2">
-      <img src="https://chathealth.nhs.uk/wp-content/uploads/2018/11/Hompage1.jpg"
-        alt="Primary content image - woman using her phone" />
+      <img
+        src="https://chathealth.nhs.uk/wp-content/uploads/2018/11/Hompage1.jpg"
+        alt="Primary content image - woman using her phone"
+      />
     </div>
   </div>
   <div class="background-gradient"></div>
 </div>
-{% endblock %}
-{% block postface_body %}
-{% include 'footer.html' %}
-{% endblock %}
+{% endblock %} {% block postface_body %} {% include 'footer.html' %} {% endblock
+%}

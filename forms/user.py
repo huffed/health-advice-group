@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError, EqualTo
+from wtforms.validators import InputRequired, Length, ValidationError, EqualTo, Email
 from models.user import Users
 from extensions import argon2
 from config import db
@@ -11,10 +11,14 @@ class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(
         min=3, max=20, message=None)], render_kw={"placeholder": ""})
 
-    password = PasswordField(validators=[InputRequired(), EqualTo("confirm", message="Passwords don't match"), Length(
+    email = StringField(validators=[InputRequired(), Email(), Length(
+        min=6, max=45, message=None)], render_kw={"placeholder": ""})
+
+    password = PasswordField(validators=[InputRequired(), Length(
         min=4)], render_kw={"placeholder": ""})
 
-    confirm = PasswordField(render_kw={"placeholder": ""})
+    confirm = PasswordField(validators=[InputRequired(), EqualTo("password", message="Passwords don't match"), Length(
+        min=4)], render_kw={"placeholder": ""})
 
     submit = SubmitField()
 

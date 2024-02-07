@@ -1,5 +1,6 @@
 from config import db
 from flask_login import UserMixin
+from sqlalchemy.sql import func
 
 
 class Usergroups(db.Model):
@@ -16,7 +17,8 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False, unique=True)
     email = db.Column(db.String(45), nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
-    date_created = db.Column(db.DateTime, nullable=False)
+    date_created = db.Column(
+        db.DateTime, nullable=False, server_default=func.now())
     usergroup = db.Column(db.SmallInteger, db.ForeignKey(
         'usergroups.id'), nullable=False, server_default="0")
     usergroups = db.relationship(

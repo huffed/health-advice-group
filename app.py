@@ -4,6 +4,7 @@ from sqlalchemy import text
 from flask_login import login_user, login_required, current_user, logout_user
 from config import create_app
 from extensions import argon2
+import datetime
 
 # MODELS
 from models.user import Usergroups, Users
@@ -63,13 +64,15 @@ def register():
 
         # Providing the SQL statement that will be used to insert the user into the database
         query = text(
-            'INSERT INTO users (username, email, password, date_created) VALUES (:username, :email, :password, :date_created)'
+            'INSERT INTO users (username, email, password) VALUES (:username, :email, :password)'
         )
         try:
             # Attempts to insert the user into the database
             database.session.execute(
-                query, {'username': form.username.data, 'password': hashed_password})
+                query, {'username': form.username.data, 'email': form.email.data, 'password': hashed_password})
             database.session.commit()
+
+            return redirect(url_for('login'))
         except Exception as error:
             # If there are any problems inserting the user into the database
             # The database committing session will rollback for security and raise the error

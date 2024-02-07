@@ -4,7 +4,7 @@
 block content %}
 
 <div class="{{form_type}}">
-    <div class="{{form_type}}-container" {% if form_type=='register' %} style="height: 32rem" {% endif %}>
+    <div class="{{form_type}}-container">
         <form action="" method="post">
             {{form.csrf_token}}
             <h2>{{form_type|title}}</h2>
@@ -24,27 +24,35 @@ block content %}
                 {% endfor %}
                 {% endif %}
             </ul>
+            {% if form_type == 'register' %}
+            <div class="input-box">
+                <i class="fa-solid fa-envelope"></i>
+                {{form.email}}
+                <label for="Email">Email</label>
+            </div>
+            {% endif %}
             <div class="input-box">
                 <i class="fa-solid fa-at"></i>
                 {{form.username}}
-                <label>Username</label>
+                <label for="Username">Username</label>
             </div>
             <div class="input-box">
                 <i class="fa-solid fa-lock"></i>
                 {{form.password}}
                 <i class="fa-regular fa-eye-slash" id="togglePassword"></i>
-                <label>Password</label>
+                <label for="Password">Password</label>
             </div>
             {% if form_type == 'register' %}
             <div class="input-box">
                 <i class="fa-solid fa-lock"></i>
                 {{form.confirm}}
-                <label>Confirm Password</label>
+                <i class="fa-regular fa-eye-slash" id="togglePassword"></i>
+                <label for="Confirming Password">Confirm Password</label>
             </div>
             {% endif %}
             {%if form_type == "login"%}
             <div class="remember-forgot">
-                <label for="remember">{{form.remember}} Remember me</label>
+                <label for="Remember">{{form.remember}} Remember me</label>
                 <a href="#">Forgot Password?</a>
             </div>
             {%endif%}
@@ -64,10 +72,12 @@ block content %}
 <script>
     $(document).ready(function () {
 
-        // This part makes it so that the username and password labels move with the autocomplete
+        // This part makes it so that the username, password and email labels move with the autocomplete
         setTimeout(function () {
+            $('#confirm').focus();
             $('#password').focus();
             $('#username').focus();
+            $('#email').focus();
         }, 600);
 
         // This is the reveal password icon code

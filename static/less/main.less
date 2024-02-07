@@ -110,7 +110,7 @@ input {
 
 button {
   margin-left: 1.25rem;
-  padding: 0.6rem @size-x3;
+  padding: 0.6rem @size-x6;
   background-color: @color-accent;
   border: none;
   border-radius: 3.1rem;
@@ -187,13 +187,13 @@ header {
     align-items: center;
 
     img {
-      margin-right: -1rem;
+      margin-right: -2rem;
     }
 
     .logo {
       font-size: @h6-font-size;
       font-weight: @heavy-font-weight;
-      margin-left: @size-x3;
+      margin-left: @size-x6;
     }
   }
 
@@ -222,7 +222,7 @@ header {
     }
 
     a {
-      margin-right: @size-x3;
+      margin-right: @size-x6;
       margin-left: 0.625rem;
       transition: @transition;
 
@@ -330,7 +330,7 @@ header {
 // FOOTER
 footer {
   position: fixed;
-  bottom: @size-x1;
+  bottom: @size-x3;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -428,10 +428,10 @@ main {
         }
 
         a {
-          margin-top: @size-x3;
+          margin-top: @size-x6;
           margin-left: 0;
           width: 100%;
-          height: @size-x4;
+          height: @size-x8;
           border: 2px @color-white solid;
           display: flex;
           justify-content: center;
@@ -464,17 +464,11 @@ main {
     width: 100%;
     height: 75vh;
 
-    .register-container {
-      .errors {
-        top: 2.5rem !important;
-      }
-    }
-
     .register-container,
     .login-container {
       position: relative;
       width: 25rem;
-      height: 28.125rem;
+      height: auto;
       background: transparent;
       border: 0.125rem solid rgba(0, 0, 0, 0.5);
       border-radius: 1.25rem;
@@ -484,6 +478,10 @@ main {
       box-shadow: 0 0 3rem -2rem @color-accent;
       backdrop-filter: blur(1rem);
       margin-bottom: 4rem;
+
+      form {
+        padding: @size-x5 0 @size-x5 0;
+      }
 
       .errors {
         all: revert;
@@ -535,7 +533,8 @@ main {
           color: @color-black;
           padding: 0 4.5rem 0 0.5rem;
 
-          &#password {
+          &#password,
+          &#confirm {
             &:focus,
             &:not(:placeholder-shown) + #togglePassword {
               display: inline-block;
@@ -616,7 +615,7 @@ main {
         font-size: @body-font-size;
         color: @color-black;
         text-align: center;
-        margin: @size-x3 0 0.625rem;
+        margin: @size-x6 0 0.625rem;
       }
     }
 
@@ -845,7 +844,7 @@ main {
       a {
         display: block;
         margin: 0.75rem 0;
-        padding: 0 @size-x3;
+        padding: 0 @size-x6;
         transition: @transition;
         color: @color-black;
 
