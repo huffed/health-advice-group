@@ -107,8 +107,7 @@ def login():
         if user and argon2.check_password_hash(user.password, form.password.data):
 
             # Login the user using the login_user function providing the User class that is needed
-            login_user(Users(id=user.id, username=user.username,
-                       password=user.password), remember=form.remember.data)
+            login_user(Users(**user._mapping), remember=form.remember.data)
 
             # If they have accessed the page via attempting to access a page that requires a login
             try:

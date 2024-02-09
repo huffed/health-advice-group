@@ -330,10 +330,10 @@ header {
 // FOOTER
 footer {
   position: fixed;
-  bottom: @size-x3;
+  bottom: @size-x1;
   width: 100%;
   display: flex;
-  justify-content: center;
+  left: 50%;
   flex-direction: column;
 
   p {
@@ -407,7 +407,7 @@ main {
     .columns {
       display: flex;
       flex-direction: row;
-      margin-top: 10rem;
+      margin-top: @size-x8;
 
       .column-1 {
         max-width: 21rem;
@@ -449,7 +449,7 @@ main {
       .column-2 {
         margin-top: calc(@size-x2 * 5);
         img {
-          filter: hue-rotate(280deg) saturate(0.6) opacity(0.6);
+          filter: hue-rotate(230deg) saturate(0.4) opacity(0.4);
         }
       }
     }
@@ -492,9 +492,9 @@ main {
         justify-content: center;
         left: 0;
         padding-left: 0;
-        top: 4rem;
+        top: calc(@size-x1*11);
 
-        li {
+        div {
           color: @color-red;
         }
       }

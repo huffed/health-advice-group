@@ -17,7 +17,7 @@ class RegisterForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(), Length(
         min=4)], render_kw={"placeholder": ""})
 
-    confirm = PasswordField(validators=[InputRequired(), EqualTo("password", message="Passwords don't match"), Length(
+    confirm = PasswordField(validators=[InputRequired(), EqualTo("password", message="Passwords don't match."), Length(
         min=4)], render_kw={"placeholder": ""})
 
     submit = SubmitField()

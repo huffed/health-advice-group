@@ -1,16 +1,7 @@
 @color-black: #121212;
 @background-color: white;
 @color-white: white;
-@color-red: red;
-@color-primary: #5f247b;
-@color-secondary: #e2c4ee;
-@color-accent: #8434b2;
-@text-gradient: linear-gradient(120deg, @color-primary, @color-accent);
-@background-gradient: linear-gradient(
-  225.66deg,
-  @color-white 0,
-  @color-secondary 100%
-);
+@color-red: #d80000;
 @font-family: "Montserrat", "Pulp", "OpenSans", "Open Sans", sans-serif;
 @size-x1: 0.5rem;
 @size-x2: calc(@size-x1 * 2);
@@ -41,3 +32,42 @@
 @button-medium-font-size: @caption-font-size;
 @button-small-font-size: @small-font-size;
 @transition: all 0.3s ease 0s;
+
+// DEFAULT THEME
+@color-primary: #b6c1ed;
+@color-secondary: #a7abd7;
+@color-accent: #2f96da;
+@text-color: @color-black;
+@text-gradient: linear-gradient(120deg, @color-primary, @color-accent);
+@background-gradient: linear-gradient(
+  225.66deg,
+  @color-white 0,
+  @color-secondary 100%
+);
+
+// THEME SPECIFIC VALUES
+[theme="light"] {
+  @color-primary: #b6c1ed;
+  @color-secondary: #a7abd7;
+  @color-accent: #2f96da;
+  @text-color: @color-black;
+  @text-gradient: linear-gradient(120deg, @color-primary, @color-accent);
+  @background-gradient: linear-gradient(
+    225.66deg,
+    @color-white 0,
+    @color-secondary 100%
+  );
+}
+
+[theme="dark"] {
+  @color-primary: #1d2441;
+  @color-secondary: #33354a;
+  @color-accent: #248cd0;
+  @text-color: @color-white;
+  @text-gradient: linear-gradient(120deg, @color-primary, @color-accent);
+  @background-gradient: linear-gradient(
+    225.66deg,
+    @color-white 0,
+    @color-secondary 100%
+  );
+}

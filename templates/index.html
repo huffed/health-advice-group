@@ -14,7 +14,10 @@ block preface_body %} {% include 'header.html' %} {% endblock %}{% block content
         provide a safe, convenient, platform for individuals seeking immediate
         guidance and support based on their location and personal information.
       </div>
-      <a class="primary-button" href="{{url_for('register')}}">START GETTING ADVICE</a>
+      <a class="primary-button" href="{{url_for('register')}}"
+        >{% if user.is_authenticated %} START GETTING ADVICE {% else %} REGISTER
+        FOR ADVICE {% endif %}</a
+      >
     </div>
     <div class="column-2">
       <img
