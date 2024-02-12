@@ -195,6 +195,7 @@ header {
       font-size: @h6-font-size;
       font-weight: @heavy-font-weight;
       margin-left: @size-x6;
+      user-select: none;
     }
   }
 
@@ -217,6 +218,7 @@ header {
   .main-buttons {
     display: flex;
     align-items: center;
+    user-select: none;
 
     .fa-xmark {
       padding-left: 0.1563rem;
@@ -480,6 +482,7 @@ main {
 
       form {
         padding: @size-x5 0 @size-x5 0;
+        user-select: none;
       }
 
       .errors {
@@ -591,6 +594,11 @@ main {
         a {
           font-weight: 500;
         }
+
+        label {
+          display: flex;
+          justify-content: center;
+        }
       }
 
       .primary-button {
@@ -620,6 +628,66 @@ main {
 
     .login-container .primary-button {
       margin-top: 1.5rem;
+    }
+  }
+
+  // DASHBOARD PAGES
+  .dashboard {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: @size-x2;
+    position: relative;
+
+    .sidebar {
+      height: 100%;
+      width: 20%;
+      border-radius: @size-x1;
+      background-color: @color-secondary;
+      padding: @size-x2;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      gap: @size-x1;
+
+      button {
+        border: none;
+        border-radius: @size-x6;
+        background-color: transparent;
+        height: @size-x6;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: @size-x2;
+        gap: @size-x2;
+        opacity: 60%;
+        cursor: pointer;
+        color: var(--text);
+      }
+    }
+
+    .tiles {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: @size-x2;
+      justify-content: center;
+      align-items: center;
+
+      .tile-wrapper {
+        display: grid;
+        grid-gap: @size-x1;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 25% 40% 35%;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
     }
   }
 

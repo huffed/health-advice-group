@@ -20,31 +20,30 @@ block content %}
             <div class="input-box">
                 <i class="fa-solid fa-envelope"></i>
                 {{form.email}}
-                <label for="Email">Email</label>
+                <label for="email">Email</label>
             </div>
             {% endif %}
             <div class="input-box">
                 <i class="fa-solid fa-at"></i>
                 {{form.username}}
-                <label for="Username">Username</label>
+                <label for="username">Username</label>
             </div>
             <div class="input-box">
                 <i class="fa-solid fa-lock"></i>
                 {{form.password}}
                 <i class="fa-regular fa-eye-slash" id="togglePassword"></i>
-                <label for="Password">Password</label>
+                <label for="password">Password</label>
             </div>
             {% if form_type == 'register' %}
             <div class="input-box">
                 <i class="fa-solid fa-lock"></i>
                 {{form.confirm}}
-                <i class="fa-regular fa-eye-slash" id="togglePassword"></i>
-                <label for="Confirming Password">Confirm Password</label>
+                <label for="confirm">Confirm Password</label>
             </div>
             {% endif %}
             {%if form_type == "login"%}
             <div class="remember-forgot">
-                <label for="Remember">{{form.remember}} Remember me</label>
+                <label for="remember">{{form.remember}} Remember me</label>
                 <a href="#">Forgot Password?</a>
             </div>
             {%endif%}

@@ -1,9 +1,11 @@
-{% extends 'base.html' %}{% block title_extension %}
-- Dashboard
-{% endblock %}{% block preface_body %}
-{% include 'header.html' %}
-{% endblock %}{% block content %}
-
-{% endblock %}{% block postface_body %}
-{% include 'footer.html' %}
-{% endblock %}
+{% extends 'base.html' %}{% block title_extension %} - Dashboard {% endblock
+%}{% block preface_body %} {% include 'header.html' %} {% endblock %}{% block
+content %}
+<div class="dashboard">
+  <div class="sidebar">
+    <button>Overview</button><button>Advice Hub</button
+    ><button>Air Quality Map</button>
+  </div>
+  <div class="tiles"><ul class="tile-wrapper"></ul></div>
+</div>
+{% endblock %}{% block postface_body %} {% endblock %}
