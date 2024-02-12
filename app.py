@@ -132,3 +132,13 @@ def logout():
 @login_required
 def dashboard():
     return render_template('dashboard/index.html')
+
+
+@app.route('/dashboard/advice', methods=['GET', 'POST'])
+def advice_hub():
+    pass
+
+
+@app.route('/dashboard/map', methods=['GET', 'POST'])
+def pollution_map():
+    pass

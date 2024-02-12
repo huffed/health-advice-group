@@ -2,10 +2,19 @@
 %}{% block preface_body %} {% include 'header.html' %} {% endblock %}{% block
 content %}
 <div class="dashboard">
-  <div class="sidebar">
-    <button>Overview</button><button>Advice Hub</button
-    ><button>Air Quality Map</button>
-  </div>
-  <div class="tiles"><ul class="tile-wrapper"></ul></div>
+    <div class="sidebar">
+        <a href="{{url_for('dashboard')}}" {% if active_page==url_for('dashboard') %}class="selected"{% endif %}>
+            <i class="fa-solid fa-chart-pie"></i>
+            Overview</a>
+            <a href="{{url_for('advice_hub')}}" {% if active_page==url_for('advice_hub') %}class="selected"{% endif %}>
+            <i class="fa-solid fa-comment-medical"></i>
+            Advice Hub</a>
+            <a href="{{url_for('pollution_map')}}" {% if active_page==url_for('pollution_map') %}class="selected"{% endif %}>
+            <i class="fa-solid fa-map"></i>
+            Air Quality Map</a>
+    </div>
+    <div class="tiles">
+        <ul class="tile-wrapper"></ul>
+    </div>
 </div>
 {% endblock %}{% block postface_body %} {% endblock %}

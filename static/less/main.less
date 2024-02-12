@@ -51,6 +51,10 @@
   padding: 0;
 }
 
+html {
+  background-color: @background-color;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -63,7 +67,6 @@ body {
   color: @color-black;
   font-weight: @regular-font-weight;
   letter-spacing: 0.025rem;
-  background-color: @background-color;
   overflow-x: hidden;
   margin: 0 12%;
   scroll-behavior: smooth;
@@ -641,9 +644,9 @@ main {
 
     .sidebar {
       height: 100%;
-      width: 20%;
+      width: 25%;
       border-radius: @size-x1;
-      background-color: @color-secondary;
+      background-color: rgba(@color-black, 3%);
       padding: @size-x2;
       display: flex;
       flex-direction: column;
@@ -651,7 +654,7 @@ main {
       align-items: center;
       gap: @size-x1;
 
-      button {
+      a {
         border: none;
         border-radius: @size-x6;
         background-color: transparent;
@@ -665,7 +668,22 @@ main {
         gap: @size-x2;
         opacity: 60%;
         cursor: pointer;
-        color: var(--text);
+        color: @text-color;
+        transition: @transition;
+        font-weight: @medium-font-weight;
+
+        &.selected {
+          opacity: 100%;
+          background-color: rgba(@color-secondary, 10%);
+        }
+
+        &:hover {
+          opacity: 100%;
+        }
+
+        i {
+          color: @color-accent;
+        }
       }
     }
 
