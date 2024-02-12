@@ -14,7 +14,9 @@ block preface_body %} {% include 'header.html' %} {% endblock %}{% block content
         provide a safe, convenient, platform for individuals seeking immediate
         guidance and support based on their location and personal information.
       </div>
-      <a class="primary-button" href="{{url_for('register')}}"
+      <a
+        class="primary-button"
+        href="{% if user.is_authenticated %}{{url_for('dashboard')}}{% else %}{{url_for('register')}}{%endif%}"
         >{% if user.is_authenticated %} START GETTING ADVICE {% else %} REGISTER
         FOR ADVICE {% endif %}</a
       >
@@ -28,5 +30,4 @@ block preface_body %} {% include 'header.html' %} {% endblock %}{% block content
   </div>
   <div class="background-gradient"></div>
 </div>
-{% endblock %} {% block postface_body %} {% include 'footer.html' %} {% endblock
-%}
+{% endblock %}
