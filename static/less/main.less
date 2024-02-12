@@ -58,7 +58,8 @@ body {
   justify-content: flex-start;
   font-family: @font-family;
   font-size: @body-font-size;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   color: @color-black;
   font-weight: @regular-font-weight;
   letter-spacing: 0.025rem;
@@ -329,11 +330,11 @@ header {
 
 // FOOTER
 footer {
-  position: fixed;
+  position: absolute;
   bottom: @size-x1;
   width: 100%;
   display: flex;
-  left: 50%;
+  left: 42.5%;
   flex-direction: column;
 
   p {
@@ -354,19 +355,17 @@ main {
   align-items: center;
   justify-content: flex-start;
   gap: 8rem;
-  margin: 5rem 0;
+  margin: @size-x2 0;
+  margin-bottom: calc(@size-x5*2);
   width: 100%;
 
   // INDEX PAGE
   .primary-content {
-    padding: 0 5.5rem 1.25rem 2.5rem;
-    color: @color-black;
-
     .background-gradient {
       background: @background-gradient;
       position: absolute;
       width: 140%;
-      height: 100vh;
+      height: 100%;
       left: -20%;
       top: 0;
       z-index: -1;
@@ -407,12 +406,13 @@ main {
     .columns {
       display: flex;
       flex-direction: row;
+      justify-content: center;
       margin-top: @size-x8;
+      gap: @size-x7;
 
       .column-1 {
         max-width: 21rem;
         width: 21rem;
-        margin-right: @size-x6;
 
         h1 {
           font-weight: 600;
@@ -462,7 +462,6 @@ main {
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 75vh;
 
     .register-container,
     .login-container {

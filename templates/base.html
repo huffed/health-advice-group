@@ -30,7 +30,7 @@
   <body>
     {% block preface_body %}{% endblock %}
     <main>{% block content %}{% endblock %}</main>
-    {% block postface_body %}{% endblock %}
+    {% include 'footer.html' %}{% block postface_body %}{% endblock %}
   </body>
 
   <script>
