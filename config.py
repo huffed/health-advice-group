@@ -50,6 +50,9 @@ def create_app():
     limiter = Limiter(
         app=app, key_func=lambda: request.remote_addr, storage_uri="memory://")
 
+    # The API key for the OpenWeatherMap API
+    openweathermap_api_key = "f8131773bee8069ac586fc7d2d701509"
+
     # Setup of the logging that will keep errors from being shown in the console.
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
@@ -61,4 +64,4 @@ def create_app():
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    return app, db, login_manager, limiter, logger, csrf
+    return app, db, login_manager, limiter, openweathermap_api_key, logger, csrf

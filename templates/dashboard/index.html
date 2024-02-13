@@ -14,7 +14,36 @@ content %}
             Air Quality Map</a>
     </div>
     <div class="tiles">
-        <ul class="tile-wrapper"></ul>
+        <ul class="tile-wrapper">
+            <li class="tile-first-row-col1 card">
+                <p class="dash-row">
+                    Temperature
+                    <i class="fa-solid fa-ellipsis"></i>
+                </p>
+                <h4>{{ "%0.2f" | format(weather['main']['temp'] - 273.15) }}&deg;C</h4>
+            </li>
+            <li class="tile-first-row-col2 card">
+                <p class="dash-row">
+                    Feels like
+                    <i class="fa-solid fa-ellipsis"></i>
+                </p>
+                <h4>{{ "%0.2f" | format(weather['main']['feels_like'] - 273.15) }}&deg;C</h4>
+            </li>
+            <li class="tile-first-row-col3 card">
+                <p class="dash-row">
+                    Pressure
+                    <i class="fa-solid fa-ellipsis"></i>
+                </p>
+                <h4>{{weather['main']['pressure']}}hPa</h4>
+            </li>
+            <li class="tile-first-row-col4 card">
+                <p class="dash-row">
+                    Humidity
+                    <i class="fa-solid fa-ellipsis"></i>
+                </p>
+                <h4>{{weather['main']['humidity']}}%</h4>
+            </li>
+        </ul>
     </div>
 </div>
 {% endblock %}{% block postface_body %} {% endblock %}

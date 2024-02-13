@@ -666,6 +666,63 @@ main {
         padding: 0;
         width: 100%;
         height: 100%;
+
+        li {
+          list-style-type: none;
+          padding: @size-x2 @size-x4;
+          text-align: center;
+          max-width: 100%;
+          border-radius: @size-x1;
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          flex-direction: column;
+          overflow: hidden;
+          font-weight: @regular-font-weight;
+          gap: @size-x2;
+          margin: 0;
+        }
+
+        .tile-first-row-col1 {
+          grid-area: ~"1 / 1 / 2 / 2";
+        }
+
+        .dash-row {
+          border-radius: @size-x1;
+          white-space: nowrap;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          opacity: 100%;
+          cursor: pointer;
+          gap: @size-x2;
+        }
+
+        h4 {
+          font-size: @h4-font-size;
+          font-weight: @heavy-font-weight;
+        }
+
+        p {
+          font-size: @size-x2;
+          letter-spacing: normal;
+          text-align: left;
+          margin: 0;
+
+          i {
+            color: @color-accent;
+            font-style: normal;
+            font-size: @size-x3;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+          }
+        }
       }
     }
   }

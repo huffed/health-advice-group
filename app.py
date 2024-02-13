@@ -1,20 +1,22 @@
 # GENERAL IMPORTS
+from forms.user import RegisterForm, LoginForm
+from models.user import Usergroups, Users
 from flask import render_template, url_for, redirect, request
 from sqlalchemy import text
 from flask_login import login_user, login_required, current_user, logout_user
 from config import create_app
 from extensions import argon2
 import datetime
+import requests
+import json
 
 # MODELS
-from models.user import Usergroups, Users
 
 # FORMS
-from forms.user import RegisterForm, LoginForm
 
 # Use the create_app function from the config to generate the values
 # for all the constructor type variables.
-app, database, login_manager, limiter, logger, csrf = create_app()
+app, database, login_manager, limiter, openweathermap_api_key, logger, csrf = create_app()
 
 # Create database tables on startup if they haven't been created already.
 with app.app_context():
@@ -131,7 +133,23 @@ def logout():
 @app.route('/dashboard', methods=['GET', 'POST'])
 @login_required
 def dashboard():
-    return render_template('dashboard/index.html')
+    request.remote_addr = "51.191.63.28"
+    # Create location variable containing the country, city, longitude, latitude etc of user
+    # This uses the ip-api.com api to get this information
+    location = json.loads(requests.get(
+        f'http://ip-api.com/json/{request.remote_addr}').text)
+
+    # If location cannot be found with the IP from the request
+    if location['status'] == 'fail':
+        'Location not found.'
+    else:
+        # If the location can be found with the IP from the request
+        # Get the weather information of the location based off the longitude and latitude
+        # from the location dictionary
+        weather = json.loads(requests.get(
+            f'http://api.openweathermap.org/data/2.5/weather?lat={str(location["lat"])}&lon={str(location["lon"])}&appid={openweathermap_api_key}').text)
+
+    return render_template('dashboard/index.html', location=location, weather=weather)
 
 
 @app.route('/dashboard/advice', methods=['GET', 'POST'])
@@ -142,3 +160,16 @@ def advice_hub():
 @app.route('/dashboard/map', methods=['GET', 'POST'])
 def pollution_map():
     pass
+
+
+@app.route('/location/<location_id>')
+def location(location_id):
+    # Make a request to the OpenAQ API to get the air quality information for the specified location
+    response = requests.get(
+        f'https://api.openaq.org/v1/measurements?location_id={location_id}')
+
+    # Parse the JSON response
+    measurements = response.json()['results']
+
+    # Render the template with the air quality information
+    return render_template('location.html', measurements=measurements)
