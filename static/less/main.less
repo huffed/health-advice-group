@@ -64,7 +64,7 @@ body {
   font-size: @body-font-size;
   min-height: 100vh;
   height: 100%;
-  color: @color-black;
+  color: @text-color;
   font-weight: @regular-font-weight;
   letter-spacing: 0.025rem;
   overflow-x: hidden;
@@ -83,7 +83,7 @@ body {
 .font-effect {
   font-style: italic;
   -webkit-text-stroke-width: 0.1rem;
-  -webkit-text-stroke-color: @color-black;
+  -webkit-text-stroke-color: @text-color;
   color: transparent;
 }
 
@@ -107,7 +107,7 @@ input {
   font-family: @font-family;
   font-weight: @medium-font-weight;
   font-size: @button-large-font-size;
-  color: @color-black;
+  color: @text-color;
   text-decoration: none;
   list-style-type: none;
 }
@@ -154,13 +154,13 @@ input {
 
     &:hover {
       transform: translate(0, -0.2rem);
-      transition: transform ease 0.2s;
+      transition: @transition;
     }
 
     &.\32 {
       background-color: transparent;
       padding: 0.6rem;
-      transition: transform ease 0.2s;
+      transition: @transition;
 
       &.active {
         color: @color-accent;
@@ -243,7 +243,7 @@ header {
 
       &.logged-in {
         &:hover {
-          color: @color-black;
+          color: @text-color;
         }
       }
     }
@@ -288,7 +288,7 @@ header {
 
       .links {
         right: -100%;
-        background-color: @color-white;
+        background-color: @background-color;
         position: absolute;
         top: 100%;
         left: auto;
@@ -320,12 +320,12 @@ header {
   }
 
   #menu-icon {
-    font-size: @h6-font-size;
+    font-size: calc(@h6-font-size*1.5);
     cursor: pointer;
     z-index: 10001;
     display: none;
     pointer-events: all;
-    transition: all, 0.2s;
+    transition: none;
 
     &:hover {
       color: @color-accent;
@@ -364,50 +364,12 @@ main {
   margin-bottom: calc(@size-x5*2);
   width: 100%;
 
+  .card {
+    background-color: rgba(@color-white, 0.1);
+  }
+
   // INDEX PAGE
   .primary-content {
-    .background-gradient {
-      background: @background-gradient;
-      position: absolute;
-      width: 140%;
-      height: 100%;
-      left: -20%;
-      top: 0;
-      z-index: -1;
-
-      &:before {
-        content: "";
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        background-image: linear-gradient(
-          to top,
-          rgba(@color-white, 0),
-          rgba(@color-white, 1) 90%
-        );
-        width: 100%;
-        height: 20rem;
-      }
-
-      &:before {
-        content: "";
-        position: absolute;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        background-image: linear-gradient(
-          to top,
-          rgba(@color-white, 0),
-          rgba(@color-white, 1) 90%
-        );
-        width: 100%;
-        height: 20rem;
-      }
-    }
-
     .columns {
       display: flex;
       flex-direction: row;
@@ -506,7 +468,7 @@ main {
 
       h2 {
         font-size: @h4-font-size;
-        color: @color-black;
+        color: @text-color;
         text-align: center;
         margin-bottom: 20%;
       }
@@ -523,7 +485,7 @@ main {
           left: 0.3rem;
           transform: translateY(-50%);
           font-size: @body-font-size;
-          color: @color-black;
+          color: @text-color;
           pointer-events: none;
           transition: @transition;
         }
@@ -535,7 +497,7 @@ main {
           border: none;
           outline: none;
           font-size: @body-font-size;
-          color: @color-black;
+          color: @text-color;
           padding: 0 4.5rem 0 0.5rem;
 
           &#password,
@@ -585,7 +547,7 @@ main {
       .remember-forgot {
         margin-top: -1rem;
         font-size: @body-font-size;
-        color: @color-black;
+        color: @text-color;
         display: flex;
         justify-content: space-between;
 
@@ -623,7 +585,7 @@ main {
       .login-link,
       .register-link {
         font-size: @body-font-size;
-        color: @color-black;
+        color: @text-color;
         text-align: center;
         margin: @size-x6 0 0.625rem;
       }
@@ -646,7 +608,6 @@ main {
       height: 100%;
       width: 25%;
       border-radius: @size-x1;
-      background-color: rgba(@color-black, 3%);
       padding: @size-x2;
       display: flex;
       flex-direction: column;
@@ -674,7 +635,7 @@ main {
 
         &.selected {
           opacity: 100%;
-          background-color: rgba(@color-secondary, 10%);
+          background-color: rgba(@color-white, 0.03);
         }
 
         &:hover {
@@ -910,7 +871,7 @@ main {
 
     .nav-links,
     .profile-container .links {
-      background-color: @color-white;
+      background-color: @background-color;
       position: absolute;
       top: 100%;
       right: -100%;
@@ -929,9 +890,8 @@ main {
       a {
         display: block;
         margin: 0.75rem 0;
-        padding: 0 @size-x6;
         transition: @transition;
-        color: @color-black;
+        color: @text-color;
 
         &:hover {
           color: @color-accent;

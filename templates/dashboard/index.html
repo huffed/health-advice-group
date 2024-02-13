@@ -2,7 +2,7 @@
 %}{% block preface_body %} {% include 'header.html' %} {% endblock %}{% block
 content %}
 <div class="dashboard">
-    <div class="sidebar">
+    <div class="card sidebar">
         <a href="{{url_for('dashboard')}}" {% if active_page==url_for('dashboard') %}class="selected"{% endif %}>
             <i class="fa-solid fa-chart-pie"></i>
             Overview</a>

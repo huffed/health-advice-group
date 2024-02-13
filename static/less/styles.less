@@ -17,7 +17,7 @@
 @medium-font-weight: 500;
 @regular-font-weight: 400;
 @thin-font-weight: 100;
-@h1-font-size: 3rem;
+@h1-font-size: 2.5rem;
 @h2-font-size: calc(@h1-font-size / 1.2);
 @h3-font-size: calc(@h2-font-size / 1.2);
 @h4-font-size: calc(@h3-font-size / 1.2);
@@ -34,40 +34,14 @@
 @transition: all 0.3s ease 0s;
 
 // DEFAULT THEME
-@color-primary: #b6c1ed;
-@color-secondary: #a7abd7;
-@color-accent: #2f96da;
-@text-color: @color-black;
-@text-gradient: linear-gradient(120deg, @color-primary, @color-accent);
+@color-primary: #1d2441;
+@color-secondary: #33354a;
+@color-accent: #248cd0;
+@text-color: @color-white;
+@background-color: @color-primary;
+@text-gradient: linear-gradient(120deg, @color-secondary, @color-accent);
 @background-gradient: linear-gradient(
   225.66deg,
-  @color-white 0,
+  @color-black 0,
   @color-secondary 100%
 );
-
-// THEME SPECIFIC VALUES
-[theme="light"] {
-  @color-primary: #b6c1ed;
-  @color-secondary: #a7abd7;
-  @color-accent: #2f96da;
-  @text-color: @color-black;
-  @text-gradient: linear-gradient(120deg, @color-primary, @color-accent);
-  @background-gradient: linear-gradient(
-    225.66deg,
-    @color-white 0,
-    @color-secondary 100%
-  );
-}
-
-[theme="dark"] {
-  @color-primary: #1d2441;
-  @color-secondary: #33354a;
-  @color-accent: #248cd0;
-  @text-color: @color-white;
-  @text-gradient: linear-gradient(120deg, @color-primary, @color-accent);
-  @background-gradient: linear-gradient(
-    225.66deg,
-    @color-white 0,
-    @color-secondary 100%
-  );
-}
