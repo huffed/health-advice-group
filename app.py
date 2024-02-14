@@ -9,6 +9,7 @@ from extensions import argon2
 import datetime
 import requests
 import json
+import ipapi
 
 # MODELS
 
@@ -136,20 +137,33 @@ def dashboard():
     request.remote_addr = "51.191.63.28"
     # Create location variable containing the country, city, longitude, latitude etc of user
     # This uses the ip-api.com api to get this information
-    location = json.loads(requests.get(
-        f'http://ip-api.com/json/{request.remote_addr}').text)
+    location = requests.get(
+        f'http://ip-api.com/json/{request.remote_addr}').json()
 
     # If location cannot be found with the IP from the request
     if location['status'] == 'fail':
         'Location not found.'
     else:
         # If the location can be found with the IP from the request
-        # Get the weather information of the location based off the longitude and latitude
-        # from the location dictionary
+        # Get the weather and air pollutioninformation of the location
+        # based off the longitude and latitude from the location dictionary
         weather = json.loads(requests.get(
-            f'http://api.openweathermap.org/data/2.5/weather?lat={str(location["lat"])}&lon={str(location["lon"])}&appid={openweathermap_api_key}').text)
+            url='http://api.openweathermap.org/data/2.5/weather',
+            params={
+                'lat': str(location["lat"]),
+                'lon': str(location["lon"]),
+                'appid': openweathermap_api_key
+            }).text)
 
-    return render_template('dashboard/index.html', location=location, weather=weather)
+        air_pollution = requests.get(
+            url='http://api.openweathermap.org/data/2.5/air_pollution',
+            params={
+                'lat': str(location["lat"]),
+                'lon': str(location["lon"]),
+                'appid': openweathermap_api_key
+            }).json()
+
+    return render_template('dashboard/index.html', location=location, weather=weather, air_pollution=air_pollution)
 
 
 @app.route('/dashboard/advice', methods=['GET', 'POST'])
