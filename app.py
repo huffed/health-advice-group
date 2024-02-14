@@ -3,7 +3,7 @@ from forms.user import RegisterForm, LoginForm
 from forms.health_condition import HealthConditionForm
 from models.user import Usergroups, Users
 from models.health_condition import HealthConditions
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, g
 from sqlalchemy import text
 from flask_login import login_user, login_required, current_user, logout_user
 from config import create_app
@@ -46,6 +46,11 @@ def load_user(user_id):
 def context_processor():
     # These functions run before rendering a template.
     return dict(user=current_user, active_page=request.path)
+
+
+@app.before_request
+def set_current_user():
+    g.user = current_user
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -196,7 +201,7 @@ def dashboard():
 
         # Providing the form that will be used on the page - would change the variable name
         # if there are other forms on the page
-        form = HealthConditionForm()
+        form = HealthConditionForm(current_user=current_user)
 
         # This defines the processes that will happen when the form is submitted and
         # passes the validity checks related to the form
