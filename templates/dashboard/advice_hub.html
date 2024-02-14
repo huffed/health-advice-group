@@ -22,63 +22,44 @@ content %}
             <ul class="tile-wrapper">
                 <li class="tile-first-row-col1 card">
                     <p class="dash-row">
-                        Weather Description
+                        NHS - Check your symptoms
                     </p>
-                    <h4>{{weather['weather'][0]['description'] | title}}</h4>
+                    <a href="https://111.nhs.uk/triage/check-your-symptoms" class="primary-button">Get advice</a>
                 </li>
                 <li class="tile-first-row-col2 card">
                     <p class="dash-row">
-                        Air Quality Index
+                        NHS - How to cope in hot weather
                     </p>
-                    <h4>{{air_pollution['list'][0]['main']['aqi']}} - {{aqi[air_pollution['list'][0]['main']['aqi']]}}
-                    </h4>
+                    <a href="https://www.nhs.uk/live-well/seasonal-health/heatwave-how-to-cope-in-hot-weather/"
+                        class="primary-button">Get advice</a>
                 </li>
                 <li class="tile-first-row-col3 card">
                     <p class="dash-row">
-                        Pressure
+                        Merton - Severe weather health advice
                     </p>
-                    <h4>{{weather['main']['pressure']}} hPa</h4>
+                    <a href="https://www.merton.gov.uk/healthy-living/severe-weather-health-advice"
+                        class="primary-button">Get advice</a>
                 </li>
                 <li class="tile-first-row-col4 card">
                     <p class="dash-row">
-                        Humidity
+                        Met Office - Health and wellbeing
                     </p>
-                    <h4>{{weather['main']['humidity']}}%</h4>
+                    <a href="https://www.metoffice.gov.uk/weather/warnings-and-advice/seasonal-advice/health-wellbeing"
+                        class="primary-button">Get advice</a>
                 </li>
                 <li class="tile-second-row-col1 card">
-                    <div class="col1">
-                        <p class="dash-row">
-                            Temperature
-                        </p>
-                        <h4>{{ "%0.2f" | format(weather['main']['temp'] - 273.15) }}&deg;C</h4>
-                    </div>
-                    <div class="col2">
-                        <p class="dash-row">
-                            Feels like
-                        </p>
-                        <h4>{{ "%0.2f" | format(weather['main']['feels_like'] - 273.15) }}&deg;C</h4>
-                    </div>
+                    <p class="dash-row">
+                        ageUK - Cold weather advice and tips
+                    </p>
+                    <a href="https://www.ageuk.org.uk/information-advice/health-wellbeing/keep-well-this-winter/cold-weather-advice/"
+                        class="primary-button">Get advice</a>
                 </li>
                 <li class="tile-second-row-col2 card">
                     <p class="dash-row">
-                        Registered Conditions
+                        ageUK - How cold weather affects your health
                     </p>
-                    <div class="conditions">
-                        <form action="" method="post">
-                            {{form.csrf_token}}
-                            {{form.condition}}
-                            {{form.submit}}
-                        </form>
-                        {% if health_conditions %}
-                        <ul>
-                            {% for condition in health_conditions %}
-                            <li>{{condition[0]}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <div style="text-align: left;">No health conditions registered.</div>
-                        {% endif %}
-                    </div>
+                    <a href="https://www.metoffice.gov.uk/weather/warnings-and-advice/seasonal-advice/health-wellbeing/stay-well-in-winter"
+                        class="primary-button">Get advice</a>
                 </li>
             </ul>
         </div>

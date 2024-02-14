@@ -20,7 +20,7 @@ class Users(db.Model, UserMixin):
     date_created = db.Column(
         db.DateTime, nullable=False, server_default=func.now())
     usergroup = db.Column(db.SmallInteger, db.ForeignKey(
-        'usergroups.id'), nullable=False, server_default="0")
+        'usergroups.id'), nullable=False, server_default="1")
     usergroups = db.relationship(
         "Usergroups", backref=db.backref("usergroups", uselist=False))
 

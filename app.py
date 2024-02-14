@@ -1,6 +1,8 @@
 # GENERAL IMPORTS
 from forms.user import RegisterForm, LoginForm
+from forms.health_condition import HealthConditionForm
 from models.user import Usergroups, Users
+from models.health_condition import HealthConditions
 from flask import render_template, url_for, redirect, request
 from sqlalchemy import text
 from flask_login import login_user, login_required, current_user, logout_user
@@ -9,7 +11,6 @@ from extensions import argon2
 import datetime
 import requests
 import json
-import ipapi
 
 # MODELS
 
@@ -59,7 +60,8 @@ def register():
     # Providing the form that will be used on the page
     form = RegisterForm()
 
-    # This defines the processes that will happen when the form is submitted
+    # This defines the processes that will happen when the form is submitted and
+    # passes the validity checks related to the form
     if form.validate_on_submit():
 
         # Hashing the password that is provided by the form using the Argon2 algorithm
@@ -94,7 +96,8 @@ def login():
     # Providing the form that will be used on the page
     form = LoginForm()
 
-    # This defines the processes that will happen when the form is submitted
+    # This defines the processes that will happen when the form is submitted and
+    # passes the validity checks related to the form
     if form.validate_on_submit():
 
         # Providing the SQL statement that will be used to search for the user in the database
@@ -119,8 +122,12 @@ def login():
             except:
                 return redirect(url_for('index'))
         else:
+            # Load the register-login template and providing the form and
+            # form_type variables for the template to use
             return render_template('register-login.html', form=form, form_type=request.path.strip('/'))
 
+    # Load the register-login template and providing the form and
+    # form_type variables for the template to use
     return render_template('register-login.html', form=form, form_type=request.path.strip('/'))
 
 
@@ -131,21 +138,27 @@ def logout():
     return redirect('/')
 
 
-@app.route('/dashboard', methods=['GET', 'POST'])
-@login_required
-def dashboard():
-    request.remote_addr = "51.191.63.28"
+def get_location_data():
+    request.remote_addr = "31.221.2.89"
     # Create location variable containing the country, city, longitude, latitude etc of user
     # This uses the ip-api.com api to get this information
     location = requests.get(
         f'http://ip-api.com/json/{request.remote_addr}').json()
+
+    return location
+
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+@login_required
+def dashboard():
+    location = get_location_data()
 
     # If location cannot be found with the IP from the request
     if location['status'] == 'fail':
         'Location not found.'
     else:
         # If the location can be found with the IP from the request
-        # Get the weather and air pollutioninformation of the location
+        # Get the weather and air pollution information of the location
         # based off the longitude and latitude from the location dictionary
         weather = json.loads(requests.get(
             url='http://api.openweathermap.org/data/2.5/weather',
@@ -154,7 +167,6 @@ def dashboard():
                 'lon': str(location["lon"]),
                 'appid': openweathermap_api_key
             }).text)
-
         air_pollution = requests.get(
             url='http://api.openweathermap.org/data/2.5/air_pollution',
             params={
@@ -163,27 +175,61 @@ def dashboard():
                 'appid': openweathermap_api_key
             }).json()
 
-    return render_template('dashboard/index.html', location=location, weather=weather, air_pollution=air_pollution)
+        # The aqi variable was declared for the user to understand what the
+        # numbers mean - referenced from the openweathermap.org website
+        aqi = {
+            1: 'Good',
+            2: 'Fair',
+            3: 'Moderate',
+            4: 'Poor',
+            5: 'Very Poor'
+        }
+
+        # Providing the SQL statement that will be used to search for the
+        # health conditions that are registered under the uid of the current user
+        query = text(
+            'SELECT name FROM health_conditions WHERE uid = :uid'
+        )
+        # Attempts to get the health conditions from the database using the current user's id
+        health_conditions = database.session.execute(
+            query, {'uid': current_user.id}).fetchall()
+
+        # Providing the form that will be used on the page - would change the variable name
+        # if there are other forms on the page
+        form = HealthConditionForm()
+
+        # This defines the processes that will happen when the form is submitted and
+        # passes the validity checks related to the form
+        if form.validate_on_submit():
+
+            # Providing the SQL statement that will be used to insert the health condition
+            # registration into the database
+            query = text(
+                'INSERT INTO health_conditions (name, uid) VALUES (:name, :uid)'
+            )
+            try:
+                # Attempts to insert the health condition registration into the database
+                database.session.execute(
+                    query, {'name': form.condition.data, 'uid': current_user.id})
+                database.session.commit()
+
+                return redirect(url_for('dashboard'))
+            except Exception as error:
+                # If there are any problems inserting the user into the database
+                # The database committing session will rollback for security and raise the error
+                database.session.rollback()
+                raise error
+
+    # Load the dashboard index template and providing the variables for the template to use
+    return render_template('dashboard/index.html', location=location, weather=weather, air_pollution=air_pollution, aqi=aqi, health_conditions=health_conditions, form=form)
 
 
 @app.route('/dashboard/advice', methods=['GET', 'POST'])
 def advice_hub():
-    pass
+    location = get_location_data()
+    return render_template('dashboard/advice_hub.html', location=location)
 
 
 @app.route('/dashboard/map', methods=['GET', 'POST'])
 def pollution_map():
     pass
-
-
-@app.route('/location/<location_id>')
-def location(location_id):
-    # Make a request to the OpenAQ API to get the air quality information for the specified location
-    response = requests.get(
-        f'https://api.openaq.org/v1/measurements?location_id={location_id}')
-
-    # Parse the JSON response
-    measurements = response.json()['results']
-
-    # Render the template with the air quality information
-    return render_template('location.html', measurements=measurements)

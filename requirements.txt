@@ -10,5 +10,4 @@ sqlalchemy==2.0.23
 flask_caching==2.1.0
 flask_less==0.6
 requests==2.31.0
-ipapi==1.0.4
 werkzeug==2.3.7

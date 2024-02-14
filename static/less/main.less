@@ -52,7 +52,7 @@
 }
 
 html {
-  background-color: @background-color;
+  background: radial-gradient(circle, @color-secondary 0%, @color-primary 100%);
 }
 
 body {
@@ -146,6 +146,7 @@ input {
   // <a> button
   &.secondary-button {
     background-color: @color-white;
+    color: @text-color;
     cursor: pointer;
     border: none;
     border-radius: 3.1rem;
@@ -436,7 +437,7 @@ main {
       width: 25rem;
       height: auto;
       background: transparent;
-      border: 0.125rem solid rgba(0, 0, 0, 0.5);
+      border: 0.125rem solid @text-color;
       border-radius: 1.25rem;
       display: flex;
       justify-content: center;
@@ -459,7 +460,7 @@ main {
         justify-content: center;
         left: 0;
         padding-left: 0;
-        top: calc(@size-x1*11);
+        top: calc(@size-x1*10);
 
         div {
           color: @color-red;
@@ -477,7 +478,7 @@ main {
         position: relative;
         width: 19.375rem;
         margin: 1.875rem 0;
-        border-bottom: 0.125rem solid rgba(0, 0, 0, 0.5);
+        border-bottom: 0.125rem solid @text-color;
 
         label {
           position: absolute;
@@ -598,6 +599,7 @@ main {
 
   // DASHBOARD PAGES
   .dashboard {
+    user-select: none;
     .title {
       margin-bottom: @size-x3;
 
@@ -676,8 +678,9 @@ main {
           height: 100%;
 
           li {
-            padding: @size-x2 @size-x4;
+            padding: @size-x2 @size-x3;
             border-radius: @size-x2;
+            max-height: calc(@size-x2*13);
           }
 
           li,
@@ -695,37 +698,58 @@ main {
             margin: 0;
           }
 
-          .tile-first-row-col1 {
-            grid-area: ~"1 / 1 / 2 / 2";
-          }
-
-          .tile-first-row-col2 {
-            grid-area: ~"1 / 2 / 2 / 3";
-          }
-
-          .tile-first-row-col3 {
-            grid-area: ~"1 / 3 / 2 / 4";
-          }
-
-          .tile-first-row-col4 {
-            grid-area: ~"1 / 4 / 2 / 5";
-          }
-
-          .tile-second-row-col1 {
-            grid-area: ~"2 / 1 / 3 / 3";
-            flex-direction: row;
-          }
-
           .dash-row {
             border-radius: @size-x1;
-            white-space: nowrap;
+            white-space: initial;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             opacity: 100%;
-            cursor: pointer;
             gap: @size-x2;
+          }
+
+          .card {
+            ul {
+              overflow-y: scroll;
+              width: 100%;
+
+              li {
+                padding: @size-x1;
+              }
+            }
+
+            .conditions {
+              form {
+                display: flex;
+                align-content: center;
+                input {
+                  background-color: @color-accent;
+                  padding: 10px;
+                  padding-top: 0;
+                  padding-bottom: 0;
+                }
+                select {
+                  appearance: none;
+                  background: transparent;
+                  padding: @size-x1;
+
+                  &:part(listbox) {
+                    color: @text-color;
+                    background: transparent;
+                  }
+                }
+
+                select,
+                input {
+                  margin-right: @size-x1;
+                  border-radius: @size-x1;
+                  color: @text-color;
+                  border-color: @text-color;
+                  cursor: pointer;
+                }
+              }
+            }
           }
 
           h4 {
