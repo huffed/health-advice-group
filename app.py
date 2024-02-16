@@ -1,24 +1,29 @@
-# GENERAL IMPORTS
-from forms.user import RegisterForm, LoginForm
-from forms.health_condition import HealthConditionForm
-from models.user import Usergroups, Users
-from models.health_condition import HealthConditions
+# TODO: https://chat.openai.com/c/68da4b2d-e149-4e13-aef9-c803aac8b39b
+
+# FLASK IMPORTS
 from flask import render_template, url_for, redirect, request, g
-from sqlalchemy import text
+from flask_caching import make_template_fragment_key
 from flask_login import login_user, login_required, current_user, logout_user
+
+# GENERAL IMPORTS
+from sqlalchemy import text
 from config import create_app
 from extensions import argon2
-import datetime
 import requests
 import json
 
 # MODELS
+from models.user import Usergroups, Users
+from models.health_condition import HealthConditions
+from models.advice_hub_cards import AdviceHubCards
 
 # FORMS
+from forms.user import RegisterForm, LoginForm
+from forms.health_condition import HealthConditionForm
 
 # Use the create_app function from the config to generate the values
 # for all the constructor type variables.
-app, database, login_manager, limiter, openweathermap_api_key, logger, csrf = create_app()
+app, database, login_manager, limiter, openweathermap_api_key, logger, csrf, cache = create_app()
 
 # Create database tables on startup if they haven't been created already.
 with app.app_context():
@@ -232,7 +237,16 @@ def dashboard():
 @app.route('/dashboard/advice', methods=['GET', 'POST'])
 def advice_hub():
     location = get_location_data()
-    return render_template('dashboard/advice_hub.html', location=location)
+
+    # Providing the SQL statement that will be used to search for the advice hub card information
+    query = text(
+        'SELECT * FROM advice_hub_cards'
+    )
+    # Attempts to get the advice hub card information from the database
+    advice_hub_cards = database.session.execute(query).fetchall()
+
+    # Load the dashboard advice hub template and providing the variables for the template to use
+    return render_template('dashboard/advice_hub.html', location=location, advice_hub_cards=advice_hub_cards)
 
 
 @app.route('/dashboard/map', methods=['GET', 'POST'])

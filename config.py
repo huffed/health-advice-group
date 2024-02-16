@@ -4,6 +4,7 @@ from flask_limiter import Limiter
 from flask import Flask, request
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
+from flask_caching import Cache
 import logging
 from logging.handlers import RotatingFileHandler
 import os
@@ -27,6 +28,8 @@ def create_app():
     # During the process of signing a cookie, the SECRET_KEY is used in
     # a way similar to how a "salt" would be used to muddle a password before hashing it.
     app.config["SECRET_KEY"] = "H34lth4dv1c3Gr0up333"
+
+    cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
     # Create an instance of the CSRF Token.
     csrf = CSRFProtect(app)
@@ -64,4 +67,4 @@ def create_app():
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    return app, db, login_manager, limiter, openweathermap_api_key, logger, csrf
+    return app, db, login_manager, limiter, openweathermap_api_key, logger, csrf, cache

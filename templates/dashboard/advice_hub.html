@@ -1,68 +1,11 @@
-{% extends 'base.html' %}{% block title_extension %} - Dashboard {% endblock
-%}{% block preface_body %} {% include 'header.html' %} {% endblock %}{% block
-content %}
-<div class="dashboard">
-    <div class="title">
-        <h2 class="location">{{location['country']}} - {{location['city']}}</h2>
-    </div>
-    <div class="dash">
-        <div class="card sidebar">
-            <a href="{{url_for('dashboard')}}" {% if active_page==url_for('dashboard') %}class="selected" {% endif %}>
-                <i class="fa-solid fa-chart-pie"></i>
-                Overview</a>
-            <a href="{{url_for('advice_hub')}}" {% if active_page==url_for('advice_hub') %}class="selected" {% endif %}>
-                <i class="fa-solid fa-comment-medical"></i>
-                Advice Hub</a>
-            <a href="{{url_for('pollution_map')}}" {% if active_page==url_for('pollution_map') %}class="selected" {%
-                endif %}>
-                <i class="fa-solid fa-map"></i>
-                Air Quality Map</a>
-        </div>
-        <div class="tiles">
-            <ul class="tile-wrapper">
-                <li class="tile-first-row-col1 card">
-                    <p class="dash-row">
-                        NHS - Check your symptoms
-                    </p>
-                    <a href="https://111.nhs.uk/triage/check-your-symptoms" class="primary-button">Get advice</a>
-                </li>
-                <li class="tile-first-row-col2 card">
-                    <p class="dash-row">
-                        NHS - How to cope in hot weather
-                    </p>
-                    <a href="https://www.nhs.uk/live-well/seasonal-health/heatwave-how-to-cope-in-hot-weather/"
-                        class="primary-button">Get advice</a>
-                </li>
-                <li class="tile-first-row-col3 card">
-                    <p class="dash-row">
-                        Merton - Severe weather health advice
-                    </p>
-                    <a href="https://www.merton.gov.uk/healthy-living/severe-weather-health-advice"
-                        class="primary-button">Get advice</a>
-                </li>
-                <li class="tile-first-row-col4 card">
-                    <p class="dash-row">
-                        Met Office - Health and wellbeing
-                    </p>
-                    <a href="https://www.metoffice.gov.uk/weather/warnings-and-advice/seasonal-advice/health-wellbeing"
-                        class="primary-button">Get advice</a>
-                </li>
-                <li class="tile-second-row-col1 card">
-                    <p class="dash-row">
-                        ageUK - Cold weather advice and tips
-                    </p>
-                    <a href="https://www.ageuk.org.uk/information-advice/health-wellbeing/keep-well-this-winter/cold-weather-advice/"
-                        class="primary-button">Get advice</a>
-                </li>
-                <li class="tile-second-row-col2 card">
-                    <p class="dash-row">
-                        ageUK - How cold weather affects your health
-                    </p>
-                    <a href="https://www.metoffice.gov.uk/weather/warnings-and-advice/seasonal-advice/health-wellbeing/stay-well-in-winter"
-                        class="primary-button">Get advice</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-{% endblock %}{% block postface_body %} {% endblock %}
+{% extends 'dashboard/dashboard.html' %}
+{% block dashboard_cards %}
+{% for card in advice_hub_cards %}
+<li class="card">
+    <p class="dash-row">
+        <span>{{ card[1] }}</span> - {{ card[2] }}
+    </p>
+    <a href="{{ card[3] }}" class="primary-button">Get advice</a>
+</li>
+{% endfor %}
+{% endblock %}

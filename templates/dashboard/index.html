@@ -1,87 +1,65 @@
-{% extends 'base.html' %}{% block title_extension %} - Dashboard {% endblock
-%}{% block preface_body %} {% include 'header.html' %} {% endblock %}{% block
-content %}
-<div class="dashboard">
-    <div class="title">
-        <h2 class="location">{{location['country']}} - {{location['city']}}</h2>
+{% extends 'dashboard/dashboard.html' %}
+{% block dashboard_cards %}
+<li class="card">
+    <p class="dash-row">
+        Weather Description
+    </p>
+    <h4>{{weather['weather'][0]['description'] | title}}</h4>
+</li>
+<li class="card">
+    <p class="dash-row">
+        Air Quality Index
+    </p>
+    <h4>{{air_pollution['list'][0]['main']['aqi']}} - {{aqi[air_pollution['list'][0]['main']['aqi']]}}
+    </h4>
+</li>
+<li class="tile-first-row-col3 card">
+    <p class="dash-row">
+        Pressure
+    </p>
+    <h4>{{weather['main']['pressure']}} hPa</h4>
+</li>
+<li class="card">
+    <p class="dash-row">
+        Humidity
+    </p>
+    <h4>{{weather['main']['humidity']}}%</h4>
+</li>
+<li class="card">
+    <div class="col1">
+        <p class="dash-row">
+            Temperature
+        </p>
+        <h4>{{ "%0.2f" | format(weather['main']['temp'] - 273.15) }}&deg;C</h4>
     </div>
-    <div class="dash">
-        <div class="card sidebar">
-            <a href="{{url_for('dashboard')}}" {% if active_page==url_for('dashboard') %}class="selected" {% endif %}>
-                <i class="fa-solid fa-chart-pie"></i>
-                Overview</a>
-            <a href="{{url_for('advice_hub')}}" {% if active_page==url_for('advice_hub') %}class="selected" {% endif %}>
-                <i class="fa-solid fa-comment-medical"></i>
-                Advice Hub</a>
-            <a href="{{url_for('pollution_map')}}" {% if active_page==url_for('pollution_map') %}class="selected" {%
-                endif %}>
-                <i class="fa-solid fa-map"></i>
-                Air Quality Map</a>
-        </div>
-        <div class="tiles">
-            <ul class="tile-wrapper">
-                <li class="tile-first-row-col1 card">
-                    <p class="dash-row">
-                        Weather Description
-                    </p>
-                    <h4>{{weather['weather'][0]['description'] | title}}</h4>
-                </li>
-                <li class="tile-first-row-col2 card">
-                    <p class="dash-row">
-                        Air Quality Index
-                    </p>
-                    <h4>{{air_pollution['list'][0]['main']['aqi']}} - {{aqi[air_pollution['list'][0]['main']['aqi']]}}
-                    </h4>
-                </li>
-                <li class="tile-first-row-col3 card">
-                    <p class="dash-row">
-                        Pressure
-                    </p>
-                    <h4>{{weather['main']['pressure']}} hPa</h4>
-                </li>
-                <li class="tile-first-row-col4 card">
-                    <p class="dash-row">
-                        Humidity
-                    </p>
-                    <h4>{{weather['main']['humidity']}}%</h4>
-                </li>
-                <li class="tile-second-row-col1 card">
-                    <div class="col1">
-                        <p class="dash-row">
-                            Temperature
-                        </p>
-                        <h4>{{ "%0.2f" | format(weather['main']['temp'] - 273.15) }}&deg;C</h4>
-                    </div>
-                    <div class="col2">
-                        <p class="dash-row">
-                            Feels like
-                        </p>
-                        <h4>{{ "%0.2f" | format(weather['main']['feels_like'] - 273.15) }}&deg;C</h4>
-                    </div>
-                </li>
-                <li class="tile-second-row-col2 card" style="gap: 1rem; justify-content: flex-start">
-                    <p class="dash-row">
-                        Registered Conditions
-                    </p>
-                    <div class="conditions">
-                        <form action="" method="post">
-                            {{form.csrf_token}}
-                            {{form.condition}}
-                            {{form.submit}}
-                        </form>
-                        {% if health_conditions %}
-                        <ul>
-                            {% for condition in health_conditions %}
-                            <li>{{condition[0]}}</li>
-                            {% endfor %}
-                        </ul>
-                        {% else %}
-                        <div style="text-align: left;">No health conditions registered.</div>
-                        {% endif %}
-                    </div>
-                </li>
+    <div class="col2">
+        <p class="dash-row">
+            Feels like
+        </p>
+        <h4>{{ "%0.2f" | format(weather['main']['feels_like'] - 273.15) }}&deg;C</h4>
+    </div>
+</li>
+<li class="card" style="gap: 1rem; justify-content: flex-start">
+    <p class="dash-row">
+        Registered Conditions
+    </p>
+    <div class="conditions">
+        <form action="" method="post">
+            {{form.csrf_token}}
+            {{form.condition}}
+            {{form.submit}}
+        </form>
+        <div style="text-align: left; width: 100%">
+            {% if health_conditions %}
+            <ul>
+                {% for condition in health_conditions %}
+                <li>{{condition[0]}}</li>
+                {% endfor %}
             </ul>
+            {% else %}
+            No health conditions registered.
+            {% endif %}
         </div>
     </div>
-</div>
-{% endblock %}{% block postface_body %} {% endblock %}
+</li>
+{% endblock %}
