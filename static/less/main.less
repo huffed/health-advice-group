@@ -52,7 +52,7 @@
 }
 
 html {
-  background: radial-gradient(circle, @color-secondary 0%, @color-primary 100%);
+  background: @background-gradient;
 }
 
 body {
@@ -732,13 +732,8 @@ main {
                 }
                 select {
                   appearance: none;
-                  background: transparent;
+                  background: @color-accent;
                   padding: @size-x1;
-
-                  &:part(listbox) {
-                    color: @text-color;
-                    background: transparent;
-                  }
                 }
 
                 select,
